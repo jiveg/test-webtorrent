@@ -120,7 +120,7 @@ function customLoader() {
 if(Hls.isSupported()) {
   var video = document.getElementById('video');
   var hls = new Hls({fLoader: customLoader});
-  hls.loadSource('playlist.m3u8');
+  hls.loadSource('193039199_mp4_h264_aac_ld_7.m3u8');
   hls.attachMedia(video);
   hls.on(Hls.Events.MANIFEST_PARSED,function() {
     video.play();
