@@ -1,5 +1,5 @@
 var client = new WebTorrent()
-var magnetURI = 'magnet:?xt=urn:btih:d1eaf779b36c0f6d7b2eaeb7f9c5e524472de951&dn=193039199_mp4_h264_aac_hd_7.ts&tr=udp%3A%2F%2Fexodus.desync.com%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com'
+var magnetURI = 'magnet:?xt=urn:btih:56239f90a02896133a7f0eef5fdf173a09bff05b&dn=playlist+(1).m3u8&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337'
 
 //curl http://www.streambox.fr/playlists/x36xhzz/url_2/193039199_mp4_h264_aac_ld_7.m3u8
 
@@ -65,7 +65,7 @@ function customLoader() {
     var self = this;
     console.log(url);
     this.loader = client;
-    this.loader.add(url+'&tr=udp%3A%2F%2Fexodus.desync.com%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com', function (torrent) {
+    this.loader.add(url+'&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337', function (torrent) {
       torrent.on('download', function (bytes) {
         console.log('just downloaded: ' + bytes)
         console.log('total downloaded: ' + torrent.downloaded);
@@ -120,9 +120,11 @@ function customLoader() {
 if(Hls.isSupported()) {
   var video = document.getElementById('video');
   var hls = new Hls({fLoader: customLoader});
-  hls.loadSource('193039199_mp4_h264_aac_ld_7.m3u8');
+  hls.loadSource('test.m3u8');
   hls.attachMedia(video);
   hls.on(Hls.Events.MANIFEST_PARSED,function() {
     video.play();
   });
 }
+
+d1eaf779b36c0f6d7b2eaeb7f9c5e524472de951
