@@ -1,19 +1,11 @@
+
+
 var client = new WebTorrent()
 var magnetURI = 'magnet:?xt=urn:btih:56239f90a02896133a7f0eef5fdf173a09bff05b&dn=playlist+(1).m3u8&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337'
 
 //curl http://www.streambox.fr/playlists/x36xhzz/url_2/193039199_mp4_h264_aac_ld_7.m3u8
 
-function customLoaderP(onSuccess) {
-  this.load = function(context, config, callbacks) {
-    var url = context.url;
-    var responseType = context.responseType;
-    var onSuccess = callbacks.onSuccess;
-    var onError = callbacks.onError;
-    var onTimeOut = callbacks.onTimeout;
-    var timeout = config.timeout;
-    var maxRetry = config.maxRetry;
-    var retryDelay = config.retryDelay;
-    strings = ['#EXTM3U',
+var strings = ['#EXTM3U',
     '#EXT-X-VERSION:3',
     '#EXT-X-PLAYLIST-TYPE:VOD',
     '#EXT-X-TARGETDURATION:10',
@@ -28,6 +20,18 @@ function customLoaderP(onSuccess) {
     '#EXTINF:10.000,',
     'magnet:?xt=urn:btih:0c96911da7c860a9ae2a26ed8a96c10590508407',
     '#EXT-X-ENDLIST'];
+var enc = new TextEncoder("utf-8");
+
+function customLoaderP(onSuccess) {
+  this.load = function(context, config, callbacks) {
+    var url = context.url;
+    var responseType = context.responseType;
+    var onSuccess = callbacks.onSuccess;
+    var onError = callbacks.onError;
+    var onTimeOut = callbacks.onTimeout;
+    var timeout = config.timeout;
+    var maxRetry = config.maxRetry;
+    var retryDelay = config.retryDelay;
     onSuccess({currentTarget: {getResponseHeader: function(){return ''}, responseText: strings.join('\n'), response: strings.join('\n')}}, {})
   }
 }
@@ -120,11 +124,9 @@ function customLoader() {
 if(Hls.isSupported()) {
   var video = document.getElementById('video');
   var hls = new Hls({fLoader: customLoader});
-  hls.loadSource('test.m3u8');
+  hls.loadSource(URL.createObjectURL(new Blob([enc.encode(strings.join('\n'))])));
   hls.attachMedia(video);
   hls.on(Hls.Events.MANIFEST_PARSED,function() {
     video.play();
   });
 }
-
-d1eaf779b36c0f6d7b2eaeb7f9c5e524472de951
